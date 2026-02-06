@@ -1,0 +1,39 @@
+basePath: /
+definitions:
+  models.Product:
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: 这是一个基于 Gin + GORM + JWT 的电商后端项目
+  title: Go电商后端 API
+  version: "1.0"
+paths:
+  /product/add:
+    post:
+      consumes:
+      - application/json
+      description: 创建一个新的商品记录 (需要管理员权限)
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: 商品信息
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功返回商品信息
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: 添加新商品
+      tags:
+      - 商品管理
+swagger: "2.0"
